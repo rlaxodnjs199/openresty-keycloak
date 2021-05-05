@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  openresty2:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: openresty2
+    hostname: openresty2
+    container_name: openresty2
+    volumes:
+      - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
+      # Let's Encrypt
+    ports:
+      - 80:80
+      #- 443:443  SSL
+    restart: on-failure
