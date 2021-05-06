@@ -10,8 +10,20 @@ services:
     container_name: openresty2
     volumes:
       - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
-      # Let's Encrypt
-    ports:
-      - 80:80
-      #- 443:443  SSL
+    # Let's Encrypt
+    network_mode: "host"
+    #- 443:443  SSL
     restart: on-failure
+  orthanc:
+    image: jodogne/orthanc-plugins
+    hostname: orthanc
+    container_name: orthanc
+    volumes:
+      # Orthanc Configuration
+      - ./orthanc/config.json:/etc/orthanc/orthanc.json:ro
+      # Persist Data
+      #- ./orthanc/db:/var/lib/orthanc/db/
+    network_mode: "host"
+    # depends_on:
+    #   - postgres
+    restart: unless-stopped
