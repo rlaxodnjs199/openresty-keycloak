@@ -1,15 +1,17 @@
 version: "3.7"
 
 services:
-  openresty2:
+  openresty:
     build:
-      context: ./
+      context: ./openresty
       dockerfile: ./Dockerfile
-    image: openresty2
-    hostname: openresty2
-    container_name: openresty2
+    image: openresty
+    hostname: openresty
+    container_name: openresty
     volumes:
-      - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
+      - ./openresty/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
+      - ./logs/nginx:/var/log/nginx
+      - /home/twkim/lamis-ohif/platform/viewer/dist:/var/www/html
     # Let's Encrypt
     network_mode: "host"
     #- 443:443  SSL
