@@ -11,7 +11,8 @@ services:
     volumes:
       - ./openresty/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
       - ./logs/nginx:/var/log/nginx
-      - /home/twkim/lamis-ohif/platform/viewer/dist:/var/www/html
+      - /home/twkim/lamis-pulmorad/build:/var/www/html/main
+      - /home/twkim/lamis-ohif/platform/viewer/dist:/var/www/html/ohif
     # Let's Encrypt
     network_mode: "host"
     #- 443:443  SSL
